@@ -230,8 +230,9 @@ void disp(int pop[][CODE_LENGTH]){
     phenotype = MIN+tmp*(MAX-MIN)/(pow(2.0,22)-1.0);
 
     //計算結果の表示
-    printf("Best : %lf %lf\n", phenotype,max);
-    printf("Ave  : %lf\n",ave);
+    printf("BestPhenotype : %lf\n",phenotype);
+    printf("BestScore     : %lf\n",max);
+    printf("Average       : %lf\n\n",ave);
 }
 
 
