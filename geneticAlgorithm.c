@@ -3,12 +3,12 @@
 #include<math.h>
 #include<time.h>
 
-#define POPULATION 1000   //個体数
+#define POPULATION 50   //個体数
 #define CODE_LENGTH 22 //遺伝子長
-#define GENERATION 50  //計算する世代数
+#define GENERATION 500  //計算する世代数
 #define MAX 2.0        //表現が型が取り得る最大値
 #define MIN -1.0       //表現型が取り得る最小値
-#define MUTATE_PRO 0.03//突然変異率
+#define MUTATE_PRO 0.01//突然変異率
 
 //初期化
 void gen_int_population(int old_pop[][CODE_LENGTH]);
@@ -107,7 +107,7 @@ void calc_fitness(int pop[][CODE_LENGTH],double fitness[]){
     for(int i = 0; i<POPULATION; i++){
         //デコード
         tmp = binary2integer(pop[i],CODE_LENGTH);
-        phenotype = -1.0 + tmp * 3.0 / (pow(2.0,22) - 1);
+        phenotype = MIN + tmp * (MAX-MIN) / (pow(2.0,22) - 1);
         fitness[i] = func(phenotype);
     }
 }
@@ -217,7 +217,7 @@ void disp(int pop[][CODE_LENGTH]){
     
     int j = 0;
     for(int i=0;i<POPULATION;i++){
-        if(max < fitness[j]){
+        if(max < fitness[i]){
             j = i;
             max = fitness[i];
         }
@@ -227,10 +227,11 @@ void disp(int pop[][CODE_LENGTH]){
 
     //デコード
     int tmp = binary2integer(pop[j],CODE_LENGTH);
-    phenotype = -1.0+tmp*3.0/(pow(2.0,22)-1.0);
+    phenotype = MIN+tmp*(MAX-MIN)/(pow(2.0,22)-1.0);
 
     //計算結果の表示
-    printf("%lf %lf\n", phenotype,max);
+    printf("Best : %lf %lf\n", phenotype,max);
+    printf("Ave  : %lf\n",ave);
 }
 
 
